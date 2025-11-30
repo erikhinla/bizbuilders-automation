@@ -1,0 +1,14 @@
+{
+  "openai_api_key": "your-openai-api-key-here",
+  "anthropic_api_key": "your-anthropic-api-key-here",
+  "openai_model": "gpt-4",
+  "content_generation_enabled": true,
+  "auto_schedule_enabled": false,
+  "default_platform": "transformby10x",
+  "generation_interval_hours": 2,
+  "max_content_per_cycle": 5,
+  "min_relevance_score": 0.7,
+  "content_types": ["social_post", "blog_post"],
+  "platforms": ["twitter", "linkedin", "facebook"]
+}
+

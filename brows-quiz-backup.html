@@ -1,0 +1,1638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anaconda Brows | Transform Your Confidence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            overflow-x: hidden;
+            background: #f8f9fa;
+        }
+
+        /* Urgency Banner */
+        .urgency-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 2000;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            padding: 0.75rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .urgency-banner.hidden {
+            display: none;
+        }
+
+        .urgency-banner .close-banner {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0.8;
+            line-height: 1;
+        }
+
+        .urgency-banner .close-banner:hover {
+            opacity: 1;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 40px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header.without-banner {
+            top: 0;
+        }
+
+        .header img {
+            height: 50px;
+        }
+
+        .header-cta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .header-phone {
+            color: #667eea;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .header-book-btn {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .header-book-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+            padding-top: 140px;
+        }
+
+        #hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        #hero-video.active {
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 2rem;
+            z-index: 10;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .hero-stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        #hero-logo {
+            max-width: 400px;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 1s ease-in-out;
+            margin: 0 auto;
+            display: block;
+        }
+
+        #hero-logo.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Live Activity Feed */
+        .live-activity {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1500;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            max-width: 300px;
+            animation: slideInUp 0.5s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .activity-badge {
+            display: inline-block;
+            background: #4caf50;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .activity-text {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .activity-time {
+            font-size: 0.75rem;
+            color: #999;
+            margin-top: 0.25rem;
+        }
+
+        /* Social Proof Section */
+        .social-proof {
+            background: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .social-proof h2 {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 3rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #667eea;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 4rem 2rem;
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 3rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .stars {
+            color: #ffc107;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        /* Parallax Section with Quiz */
+        .parallax-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 4rem 2rem;
+        }
+
+        .parallax-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            opacity: 0.2;
+        }
+
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.2);
+        }
+
+        .quiz-step {
+            display: none;
+        }
+
+        .quiz-step.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .progress-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #ddd;
+            transition: all 0.3s ease;
+        }
+
+        .progress-dot.active {
+            background: #667eea;
+            transform: scale(1.3);
+        }
+
+        .quiz-container h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #667eea;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .quiz-option {
+            padding: 1.5rem 2rem;
+            font-size: 1.1rem;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .quiz-option:hover {
+            border-color: #667eea;
+            transform: translateX(10px);
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .quiz-option.selected {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        .quiz-btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .quiz-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .quiz-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .quiz-btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .quiz-btn-secondary:hover {
+            background: #f0f4ff;
+        }
+
+        .welcome-screen {
+            text-align: center;
+        }
+
+        .welcome-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        .brow-types-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .brow-type-card {
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .brow-type-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .brow-type-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .question-title {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .question-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .question-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .result-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.1);
+            margin: 2rem auto;
+            max-width: 700px;
+        }
+
+        .persona-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .persona-title {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .persona-tagline {
+            font-size: 1.2rem;
+            color: #764ba2;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .persona-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: #555;
+        }
+
+        .treatment-cards {
+            display: grid;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .treatment-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: left;
+            border: 2px solid #e0e0e0;
+        }
+
+        .treatment-name {
+            font-size: 1.5rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .treatment-desc {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .treatment-benefits {
+            list-style: none;
+            padding: 0;
+        }
+
+        .treatment-benefits li {
+            padding: 0.5rem 0;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .benefit-check {
+            color: #4caf50;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .book-now-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin: 2rem 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .book-now-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Why Choose Section */
+        .why-choose {
+            background: white;
+            padding: 4rem 2rem;
+        }
+
+        .why-choose h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-family: 'Playfair Display', serif;
+            color: #667eea;
+            font-size: 2.5rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: #f8f9fa;
+            padding: 4rem 2rem;
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-family: 'Playfair Display', serif;
+            color: #667eea;
+            font-size: 2.5rem;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #667eea;
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 1.5rem;
+            max-height: 500px;
+        }
+
+        /* Booking Form */
+        .booking-form {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .header {
+                padding: 1rem;
+            }
+
+            .header-cta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .header-phone {
+                font-size: 0.9rem;
+            }
+
+            .header-book-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .live-activity {
+                bottom: 10px;
+                left: 10px;
+                right: 10px;
+                max-width: none;
+            }
+
+            .hero-stats {
+                gap: 1.5rem;
+            }
+
+            .quiz-container {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Urgency Banner -->
+    <div class="urgency-banner" id="urgency-banner">
+        🔥 Limited spots available this week - Book your consultation now!
+        <button class="close-banner" onclick="document.getElementById('urgency-banner').classList.add('hidden'); document.querySelector('.header').classList.add('without-banner');">×</button>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <img src="https://raw.githubusercontent.com/erikhinla/anaconda-brows/main/adda-brow-logo.png" alt="Anaconda Brows Logo">
+        <div class="header-cta">
+            <a href="tel:+1234567890" class="header-phone">📞 (123) 456-7890</a>
+            <a href="https://cal.com/anaconda-brows/consultation" target="_blank" class="header-book-btn">Book Now</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <video id="hero-video" autoplay loop muted playsinline>
+            <source src="https://raw.githubusercontent.com/erikhinla/anaconda-brows/main/background-1.mp4" type="video/mp4">
+        </video>
+        <div class="hero-content">
+            <img id="hero-logo" src="https://raw.githubusercontent.com/erikhinla/anaconda-brows/main/adda-brow-logo.png" alt="Anaconda Brows">
+            <h1>Transform Your Confidence</h1>
+            <p>Discover your perfect brow style with our personalized quiz</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-number">10K+</span>
+                    <span class="hero-stat-label">Happy Clients</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">5★</span>
+                    <span class="hero-stat-label">Average Rating</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-number">100%</span>
+                    <span class="hero-stat-label">Satisfaction</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Activity Feed -->
+    <div class="live-activity">
+        <div class="activity-badge">🔴 LIVE</div>
+        <div class="activity-text">Sarah just booked a consultation</div>
+        <div class="activity-time">2 minutes ago</div>
+    </div>
+
+    <!-- Social Proof Section -->
+    <section class="social-proof">
+        <h2>Trusted by Thousands</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-number">10,000+</span>
+                <div class="stat-label">Transformations</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">98%</span>
+                <div class="stat-label">Client Satisfaction</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">5★</span>
+                <div class="stat-label">Average Rating</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">100+</span>
+                <div class="stat-label">Expert Artists</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <h2>What Our Clients Say</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"Best decision I ever made! My brows look absolutely perfect and natural. The team is so professional and made me feel comfortable throughout."</p>
+                <div class="testimonial-author">— Jessica M.</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"I was so nervous about permanent makeup, but Anaconda Brows made the process so easy. The results exceeded my expectations!"</p>
+                <div class="testimonial-author">— Maria L.</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"Life-changing! I wake up with perfect brows every day. Worth every penny and more."</p>
+                <div class="testimonial-author">— Amanda K.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parallax Quiz Section -->
+    <section class="parallax-section" id="quiz-section">
+        <video class="parallax-video" autoplay loop muted playsinline>
+            <source src="https://raw.githubusercontent.com/erikhinla/anaconda-brows/main/background-2.mp4" type="video/mp4">
+        </video>
+        <div class="quiz-container">
+            <!-- Welcome Screen -->
+            <div class="quiz-step active welcome-screen" id="welcome">
+                <div class="welcome-badge">2-MINUTE QUIZ</div>
+                <h2 class="welcome-title">Discover Your Perfect Brow Persona</h2>
+                <p class="welcome-subtitle">
+                    Answer a few quick questions to unlock your unique brow personality and receive 
+                    personalized treatment recommendations for your dream brows.
+                </p>
+                <div class="brow-types-preview">
+                    <div class="brow-type-card">
+                        <div class="brow-type-emoji">👑</div>
+                        <div class="brow-type-name">The Classic</div>
+                    </div>
+                    <div class="brow-type-card">
+                        <div class="brow-type-emoji">✨</div>
+                        <div class="brow-type-name">The Bold</div>
+                    </div>
+                    <div class="brow-type-card">
+                        <div class="brow-type-emoji">🌸</div>
+                        <div class="brow-type-name">The Natural</div>
+                    </div>
+                    <div class="brow-type-card">
+                        <div class="brow-type-emoji">💎</div>
+                        <div class="brow-type-name">The Glamorous</div>
+                    </div>
+                </div>
+                <button class="cta-button" onclick="startQuiz()">Find My Brow Persona →</button>
+            </div>
+
+            <!-- Question 1 -->
+            <div class="quiz-step" id="q1">
+                <div class="progress-bar">
+                    <div class="progress-dot active"></div>
+                    <div class="progress-dot"></div>
+                    <div class="progress-dot"></div>
+                    <div class="progress-dot"></div>
+                    <div class="progress-dot"></div>
+                </div>
+                <div class="question-number">1</div>
+                <h2 class="question-title">How would you describe your current brows?</h2>
+                <p class="question-subtitle">Be honest - we're here to help!</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-question="1" data-value="sparse">
+                        <strong>🙁 Sparse & Patchy</strong>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">I have gaps and need to fill them in daily</div>
+                    </div>
+                    <div class="quiz-option" data-question="1" data-value="overplucked">
+                        <strong>😔 Over-Plucked</strong>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Years of tweezing have taken their toll</div>
+                    </div>
+                    <div class="quiz-option" data-question="1" data-value="uneven">
+                        <strong>🤔 Uneven Sisters</strong>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">They're cousins, not twins - very distant cousins</div>
+                    </div>
+                    <div class="quiz-option" data-question="1" data-value="undefined">
+                        <strong>😐 Undefined</strong>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">They're there but lack shape and definition</div>
+                    </div>
+                </div>
+                <div class="quiz-navigation">
+                    <button class="quiz-btn quiz-btn-secondary" onclick="previousQuestion(1)">← Back</button>
+                    <button class="quiz-btn" id="next-1" onclick="nextQuestion(1)" disabled>Next →</button>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="quiz-step" id="q2">
+                <div class="progress-bar">
+                    <div class="progress-dot active"></div>
+                    <div class="progress-dot active"></div>
+                    <div class="progress-dot"></div>
+                    <div class="progress-dot"></div>
+                    <div class="progress-dot"></div>
+                </div>
+                <div class="question-number">2</div>
+                <h2 class="question-title">What's your dream brow style?</h2>
+                <p class="question-subtitle">Choose the look that speaks to you</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-question="2" data-value="soft-natural">
+                        <strong>🌸 Soft & Natural</strong>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Enhance what nature gave you</div>
+                    </div>
+                    <div class="quiz-option" data-question="2" data-value="bold-defined">
+                        <strong>✨ Bold & Defined</strong>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Make a statement that commands attention</div>
+                    </div>
+                    <div class="quiz-option" data-question="2" data-value="feathered">
+                        <strong>🪶 Feathered & Fluffy</strong>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">The trendy, bushy brow look</div>
+                    </div>
+                    <div class="quiz-option" data-question="2" data-value="structured">
+                        <strong>📐 Structured & Sharp</strong>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Clean lines and perfect arches</div>
+                    </div>
+                </div>
+                <div class="quiz-navigation">
+                    <button class="quiz-btn quiz-btn-secondary" onclick="previousQuestion(2)">← Back</button>
+                    <button class="quiz-btn" id="next-2" onclick="nextQuestion(2)" disabled>Next →</button>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="quiz-step" id="q3">
+                <div class="progress-bar">
+                    <div class="progress-dot active"></div>
+                    <div class="progress-dot active"></div>
+                    <div class="progress-dot active"></div>
+                    <div class="progress-dot"></div>
+                    <div class="progress-dot"></div>
+                </div>
+                <div class="question-number">3</div>
+                <h2 class="question-title">How much time do you spend on your brows daily?</h2>
+                <p class="question-subtitle">Be honest about your morning routine</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-question="3" data-value="none">
+                        <strong>⚡ Zero Minutes</strong>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">I wake up like this (or wish I could)</div>
+                    </div>
+                    <div class="quiz-option" data-question="3" data-value="quick">
+                        <strong>⏰ 2-5 Minutes</strong>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Quick swipe of brow gel and go</div>
+                    </div>
+                    <div class="quiz-option" data-question="3" data-value="moderate">
+                        <strong>💄 5-10 Minutes</strong>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Pencil, powder, gel - the works</div>
+                    </div>
+                    <div class="quiz-option" data-question="3" data-value="extensive">
+                        <strong>🎨 10+ Minutes</strong>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">It's an art form and I'm Picasso</div>
+                    </div>
+                </div>
+                <div class="quiz-navigation">
+                    <button class="quiz-btn quiz-btn-secondary" onclick="previousQuestion(3)">← Back</button>
+                    <button class="quiz-btn" id="next-3" onclick="nextQuestion(3)" disabled>Next →</button>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="quiz-step" id="q4">
+                <div class="progress-bar">
+                    <div class="progress-dot active"></div>
+                    <div class="progress-dot active"></div>
+                    <div class="progress-dot active"></div>
+                    <div class="progress-dot active"></div>
+                    <div class="progress-dot"></div>
+                </div>
+                <div class="question-number">4</div>
+                <h2 class="question-title">What's your lifestyle like?</h2>
+                <p class="question-subtitle">This helps us recommend the best treatment</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-question="4" data-value="active">
+                        <strong>🏃‍♀️ Super Active</strong>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Gym, swimming, always on the go</div>
+                    </div>
+                    <div class="quiz-option" data-question="4" data-value="professional">
+                        <strong>💼 Professional</strong>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Meetings, presentations, polished look</div>
+                    </div>
+                    <div class="quiz-option" data-question="4" data-value="social">
+                        <strong>🥂 Social Butterfly</strong>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Events, dinners, photo-ready always</div>
+                    </div>
+                    <div class="quiz-option" data-question="4" data-value="lowkey">
+                        <strong>☕ Low-Key</strong>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Natural beauty, minimal fuss</div>
+                    </div>
+                </div>
+                <div class="quiz-navigation">
+                    <button class="quiz-btn quiz-btn-secondary" onclick="previousQuestion(4)">← Back</button>
+                    <button class="quiz-btn" id="next-4" onclick="nextQuestion(4)" disabled>Next →</button>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="quiz-step" id="q5">
+                <div class="progress-bar">
+                    <div class="progress-dot active"></div>
+                    <div class="progress-dot active"></div>
+                    <div class="progress-dot active"></div>
+                    <div class="progress-dot active"></div>
+                    <div class="progress-dot active"></div>
+                </div>
+                <div class="question-number">5</div>
+                <h2 class="question-title">What's most important to you?</h2>
+                <p class="question-subtitle">This helps us match you with the perfect treatment</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-question="5" data-value="natural">
+                        <strong>🌿 Most Natural Look</strong>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Hair-like strokes that fool everyone</div>
+                    </div>
+                    <div class="quiz-option" data-question="5" data-value="longevity">
+                        <strong>⏳ Longest Lasting</strong>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Maximum time between touch-ups</div>
+                    </div>
+                    <div class="quiz-option" data-question="5" data-value="dramatic">
+                        <strong>💫 Most Dramatic Change</strong>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Total transformation please!</div>
+                    </div>
+                    <div class="quiz-option" data-question="5" data-value="versatile">
+                        <strong>🎭 Versatility</strong>
+                        <div style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Base that I can style different ways</div>
+                    </div>
+                </div>
+                <div class="quiz-navigation">
+                    <button class="quiz-btn quiz-btn-secondary" onclick="previousQuestion(5)">← Back</button>
+                    <button class="quiz-btn" id="next-5" onclick="showResults()" disabled>See My Results →</button>
+                </div>
+            </div>
+
+            <!-- Results Screen -->
+            <div class="quiz-step" id="results">
+                <div class="result-card">
+                    <div class="persona-icon" id="persona-icon">👑</div>
+                    <h2 class="persona-title" id="persona-name">The Classic Beauty</h2>
+                    <p class="persona-tagline" id="persona-tagline">Timeless elegance meets modern sophistication</p>
+                    <p class="persona-description" id="persona-description">
+                        You appreciate refined beauty that enhances rather than overpowers. Your ideal brows 
+                        frame your face perfectly while maintaining a natural, polished appearance that works 
+                        from boardroom to brunch.
+                    </p>
+                    
+                    <div class="treatment-cards" id="treatment-cards">
+                        <!-- Treatment cards will be inserted here -->
+                    </div>
+
+                    <a href="https://cal.com/anaconda-brows/consultation" target="_blank" class="book-now-button">
+                        Book Now, Better Brows!
+                    </a>
+
+                    <!-- Booking Form -->
+                    <div class="booking-form" style="margin-top: 3rem;">
+                        <h3 style="color: #667eea; margin-bottom: 1rem; font-family: 'Playfair Display', serif;">Ready for Your Dream Brows?</h3>
+                        <p style="color: #666; margin-bottom: 2rem;">Book your consultation and save $50 on your first treatment</p>
+                        <form id="booking-form" onsubmit="submitBooking(event)">
+                            <div class="form-group">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-input" name="firstName" placeholder="Sarah" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-input" name="lastName" placeholder="Johnson" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-input" name="email" placeholder="sarah@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Phone</label>
+                                <input type="tel" class="form-input" name="phone" placeholder="(555) 123-4567" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Preferred Treatment</label>
+                                <select class="form-input form-select" id="treatment-select" name="treatment" required>
+                                    <option value="">Select Treatment</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Preferred Date</label>
+                                <input type="date" class="form-input" name="preferredDate" required>
+                            </div>
+                            <button type="submit" class="form-submit">Book My Transformation →</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Section -->
+    <section class="why-choose">
+        <h2>Why Choose Anaconda Brows?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">✨</div>
+                <h3>Expert Artists</h3>
+                <p>Certified professionals with years of experience</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Custom Design</h3>
+                <p>Personalized brow design just for you</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💎</div>
+                <h3>Premium Quality</h3>
+                <p>Top-grade pigments and tools</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">❤️</div>
+                <h3>Long Lasting</h3>
+                <p>Beautiful brows that last 2-3 years</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    How long does the procedure take?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    The initial procedure typically takes 2-3 hours, including consultation, design, and application.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    How long do the results last?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Results typically last 2-3 years, depending on your skin type and lifestyle. Touch-ups are recommended annually.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Does it hurt?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Most clients experience minimal discomfort. We use topical numbing creams to ensure your comfort throughout the procedure.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    What's the healing process like?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Healing takes about 10-14 days. Your brows will initially appear darker, then lighten as they heal to the perfect shade.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Quiz state
+        let answers = {};
+        let currentQuestion = 0;
+
+        // Persona definitions
+        const personas = {
+            classic: {
+                icon: '👑',
+                name: 'The Classic Beauty',
+                tagline: 'Timeless elegance meets modern sophistication',
+                description: 'You appreciate refined beauty that enhances rather than overpowers. Your ideal brows frame your face perfectly while maintaining a natural, polished appearance that works from boardroom to brunch.',
+                treatments: [
+                    {
+                        name: 'Ombré Powder Brows',
+                        desc: 'Perfect for your sophisticated style. Creates a soft, powdered effect that looks like you just applied the perfect amount of makeup.',
+                        benefits: [
+                            'Lasts 2-3 years',
+                            'Soft, gradient effect',
+                            'Low maintenance',
+                            'Waterproof & smudge-proof'
+                        ]
+                    },
+                    {
+                        name: 'Combo Brows',
+                        desc: 'The best of both worlds - hair strokes in the front with powder fill behind for dimension and fullness.',
+                        benefits: [
+                            'Natural hair-like strokes',
+                            'Added density & definition',
+                            'Customizable intensity',
+                            'Perfect for sparse areas'
+                        ]
+                    }
+                ]
+            },
+            bold: {
+                icon: '✨',
+                name: 'The Bold Statement',
+                tagline: 'Confidence is your middle name',
+                description: 'You\'re not afraid to make a statement. Your brows should be as bold and confident as you are, commanding attention and framing your fearless personality.',
+                treatments: [
+                    {
+                        name: 'Bold Ombré Powder',
+                        desc: 'Maximum impact with rich, saturated color that makes a statement from across the room.',
+                        benefits: [
+                            'Dramatic definition',
+                            'Instagram-ready always',
+                            'No daily makeup needed',
+                            'Confidence boosting'
+                        ]
+                    },
+                    {
+                        name: 'Defined Combo Brows',
+                        desc: 'Sharp, defined edges with dense fill for those who want their brows to be a focal point.',
+                        benefits: [
+                            'Structured shape',
+                            'Full coverage',
+                            'Long-lasting impact',
+                            'Photogenic perfection'
+                        ]
+                    }
+                ]
+            },
+            natural: {
+                icon: '🌸',
+                name: 'The Natural Beauty',
+                tagline: 'Effortlessly beautiful, naturally you',
+                description: 'You believe in enhancing what nature gave you. Your ideal brows look like you were born with them - full, soft, and perfectly imperfect.',
+                treatments: [
+                    {
+                        name: 'Soft Powder Brows',
+                        desc: 'Gentle enhancement that looks like your brows, but on their best day ever.',
+                        benefits: [
+                            'Barely-there makeup look',
+                            'Soft, natural gradient',
+                            'Enhances existing brows',
+                            'Wake up ready'
+                        ]
+                    },
+                    {
+                        name: 'Natural Combo Brows',
+                        desc: 'Realistic hair strokes that blend seamlessly with your natural brows for undetectable enhancement.',
+                        benefits: [
+                            'Hyper-realistic strokes',
+                            'Fills gaps naturally',
+                            'Grows out beautifully',
+                            'Low commitment'
+                        ]
+                    }
+                ]
+            },
+            glamorous: {
+                icon: '💎',
+                name: 'The Glamour Queen',
+                tagline: 'Red carpet ready, always',
+                description: 'Life is your stage and you\'re always camera-ready. Your brows should be as glamorous as your lifestyle, perfectly polished and perpetually stunning.',
+                treatments: [
+                    {
+                        name: 'Luxury Ombré Brows',
+                        desc: 'High-fashion brows with perfect gradient and shape that photographs beautifully in any light.',
+                        benefits: [
+                            'Photo-perfect always',
+                            'High-impact glamour',
+                            'Event ready 24/7',
+                            'Celebrity-inspired'
+                        ]
+                    },
+                    {
+                        name: 'Glamour Combo Brows',
+                        desc: 'The ultimate in brow luxury - detailed strokes with rich powder for multidimensional perfection.',
+                        benefits: [
+                            'Red carpet worthy',
+                            'Dimensional depth',
+                            'Luxury finish',
+                            'VIP treatment'
+                        ]
+                    }
+                ]
+            }
+        };
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show hero video and logo
+            setTimeout(() => {
+                const heroVideo = document.getElementById('hero-video');
+                const heroLogo = document.getElementById('hero-logo');
+                if (heroVideo) heroVideo.classList.add('active');
+                if (heroLogo) heroLogo.classList.add('active');
+            }, 500);
+
+            // Update activity feed periodically
+            setInterval(updateActivity, 30000);
+
+            // Initialize quiz
+            initializeQuiz();
+        });
+
+        function initializeQuiz() {
+            // Answer selection handlers
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const question = parseInt(this.getAttribute('data-question'));
+                    const value = this.getAttribute('data-value');
+                    selectAnswer(question, value, this);
+                });
+            });
+        }
+
+        function startQuiz() {
+            document.getElementById('welcome').classList.remove('active');
+            document.getElementById('q1').classList.add('active');
+            currentQuestion = 1;
+            document.getElementById('quiz-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function selectAnswer(question, answer, element) {
+            // Store answer
+            answers[`q${question}`] = answer;
+            
+            // Remove selected from all options in this question
+            const questionCard = element.closest('.quiz-step');
+            questionCard.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Mark selected
+            element.classList.add('selected');
+            
+            // Enable next button
+            const nextBtn = document.getElementById(`next-${question}`);
+            if (nextBtn) {
+                nextBtn.disabled = false;
+            }
+        }
+
+        function nextQuestion(current) {
+            if (current < 5) {
+                document.getElementById(`q${current}`).classList.remove('active');
+                document.getElementById(`q${current + 1}`).classList.add('active');
+                currentQuestion = current + 1;
+                restoreAnswer(current + 1);
+            }
+        }
+
+        function previousQuestion(current) {
+            if (current === 1) {
+                document.getElementById('q1').classList.remove('active');
+                document.getElementById('welcome').classList.add('active');
+                currentQuestion = 0;
+            } else {
+                document.getElementById(`q${current}`).classList.remove('active');
+                document.getElementById(`q${current - 1}`).classList.add('active');
+                currentQuestion = current - 1;
+                restoreAnswer(current - 1);
+            }
+        }
+
+        function restoreAnswer(question) {
+            const answer = answers[`q${question}`];
+            if (answer) {
+                const questionCard = document.getElementById(`q${question}`);
+                const options = questionCard.querySelectorAll('.quiz-option');
+                options.forEach(opt => {
+                    if (opt.getAttribute('data-value') === answer) {
+                        opt.classList.add('selected');
+                        const nextBtn = document.getElementById(`next-${question}`);
+                        if (nextBtn) {
+                            nextBtn.disabled = false;
+                        }
+                    }
+                });
+            }
+        }
+
+        function calculatePersona() {
+            const { q1, q2, q3, q4, q5 } = answers;
+            
+            // Scoring logic
+            if (q2 === 'bold-defined' || q5 === 'dramatic') {
+                return 'bold';
+            } else if (q2 === 'soft-natural' || q5 === 'natural') {
+                return 'natural';
+            } else if (q4 === 'social' || q2 === 'structured') {
+                return 'glamorous';
+            } else if (q4 === 'professional' || q5 === 'versatile') {
+                return 'classic';
+            } else if (q4 === 'lowkey' && q3 === 'none') {
+                return 'natural';
+            } else if (q3 === 'extensive' || q5 === 'dramatic') {
+                return 'glamorous';
+            } else {
+                return 'classic';
+            }
+        }
+
+        function showResults() {
+            const persona = calculatePersona();
+            const personaData = personas[persona];
+            
+            // Update persona display
+            document.getElementById('persona-icon').textContent = personaData.icon;
+            document.getElementById('persona-name').textContent = personaData.name;
+            document.getElementById('persona-tagline').textContent = personaData.tagline;
+            document.getElementById('persona-description').textContent = personaData.description;
+            
+            // Display treatment recommendations
+            const treatmentCards = document.getElementById('treatment-cards');
+            treatmentCards.innerHTML = personaData.treatments.map(treatment => `
+                <div class="treatment-card">
+                    <h3 class="treatment-name">${treatment.name}</h3>
+                    <p class="treatment-desc">${treatment.desc}</p>
+                    <ul class="treatment-benefits">
+                        ${treatment.benefits.map(benefit => 
+                            `<li><span class="benefit-check">✓</span> ${benefit}</li>`
+                        ).join('')}
+                    </ul>
+                </div>
+            `).join('');
+            
+            // Update treatment select options
+            const treatmentSelect = document.getElementById('treatment-select');
+            treatmentSelect.innerHTML = `
+                <option value="">Select Treatment</option>
+                ${personaData.treatments.map(treatment => 
+                    `<option value="${treatment.name.toLowerCase().replace(/\s+/g, '-')}">${treatment.name}</option>`
+                ).join('')}
+                <option value="consultation">Consultation Only</option>
+            `;
+            
+            // Show results
+            document.getElementById('q5').classList.remove('active');
+            document.getElementById('results').classList.add('active');
+            
+            // Scroll to results
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function submitBooking(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            
+            // Add quiz results
+            data.persona = calculatePersona();
+            data.answers = answers;
+            
+            // Here you would send to your backend
+            console.log('Booking submission:', data);
+            
+            // Show success message
+            alert(`Thank you! Your consultation has been requested. We'll contact you within 24 hours to confirm your appointment. Check your email for your personalized Brow Persona guide and $50 off coupon!`);
+            
+            // Optionally redirect to Cal.com
+            // window.location.href = 'https://cal.com/anaconda-brows/consultation';
+        }
+
+        function toggleFaq(element) {
+            const faqItem = element.parentElement;
+            faqItem.classList.toggle('active');
+            const span = element.querySelector('span');
+            span.textContent = faqItem.classList.contains('active') ? '−' : '+';
+        }
+
+        function updateActivity() {
+            const activities = [
+                'Sarah just booked a consultation',
+                'Jessica completed her touch-up',
+                'Maria left a 5-star review',
+                'Amanda booked her follow-up',
+                'Emily scheduled her consultation'
+            ];
+            const times = ['1 minute ago', '2 minutes ago', '5 minutes ago', '10 minutes ago', '15 minutes ago'];
+            
+            const activityText = document.querySelector('.activity-text');
+            const activityTime = document.querySelector('.activity-time');
+            
+            if (activityText && activityTime) {
+                activityText.textContent = activities[Math.floor(Math.random() * activities.length)];
+                activityTime.textContent = times[Math.floor(Math.random() * times.length)];
+            }
+        }
+    </script>
+</body>
+</html>

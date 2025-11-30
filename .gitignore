@@ -3,6 +3,14 @@
 .env.local
 .env.*.local
 
+# Configuration files with secrets
+config.json
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
 # Python
 __pycache__/
 *.py[cod]
@@ -39,3 +47,4 @@ dist/
 build/
 *.egg-info/
 
+.vercel

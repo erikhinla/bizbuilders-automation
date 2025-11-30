@@ -1,0 +1,26 @@
+# Python files (backend, not needed for frontend deployment)
+*.py
+requirements.txt
+Procfile
+**/*_system.py
+**/*_hub.py
+content_hub_api.py
+integration_automation_hub.py
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Test files
+test_*.py
+*_test.py
+
+# Config files with secrets
+config.json
+
