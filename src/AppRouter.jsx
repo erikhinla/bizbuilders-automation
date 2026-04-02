@@ -6,6 +6,7 @@ import { ContentGenerator } from './pages/ContentGenerator'
 import { ContentQueue } from './pages/ContentQueue'
 import { Trends } from './pages/Trends'
 import { Settings } from './pages/Settings'
+import { Intake } from './pages/Intake'
 import App from './App'
 
 export function AppRouter() {
@@ -15,7 +16,10 @@ export function AppRouter() {
         <Routes>
           {/* Public landing page */}
           <Route path="/" element={<App />} />
-          
+
+          {/* Intake */}
+          <Route path="/intake" element={<Intake />} />
+
           {/* Hub routes */}
           <Route path="/hub" element={<HubLayout />}>
             <Route index element={<Navigate to="/hub/dashboard" replace />} />
@@ -25,7 +29,7 @@ export function AppRouter() {
             <Route path="trends" element={<Trends />} />
             <Route path="settings" element={<Settings />} />
           </Route>
-          
+
           {/* Catch all */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
@@ -33,4 +37,3 @@ export function AppRouter() {
     </ToastProvider>
   )
 }
-
