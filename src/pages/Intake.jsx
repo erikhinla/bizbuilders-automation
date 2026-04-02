@@ -225,7 +225,22 @@ export function Intake() {
       submitted_at: new Date().toISOString(),
     }
 
-    // Submit via mailto fallback (webhook can be added later)
+    // Submit to webhook
+    try {
+      const webhookResp = await fetch('https://intake.srv1413136.hstgr.cloud/intake', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      if (!webhookResp.ok) throw new Error('webhook failed')
+      setStep('submitted')
+      setSubmitting(false)
+      return
+    } catch (_) {
+      // Fallback to mailto
+    }
+
+    // Mailto fallback
     const subject = encodeURIComponent(`Context Architecture Assessment — ${contact.name}`)
     const body = encodeURIComponent(
       `Name: ${contact.name}\nEmail: ${contact.email}\nCompany: ${contact.company}\n\n` +
